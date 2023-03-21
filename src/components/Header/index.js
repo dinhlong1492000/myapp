@@ -1,19 +1,24 @@
 import styles from "./Header.module.sass";
+import { useNavigate } from "react-router";
 import cn from "classnames";
 const Header = () => {
+  const navigate = useNavigate()
   return (
     <header className={cn("py-2", styles.header)}>
       <div className="container d-flex justify-content-between align-items-center">
         <div className={styles.logoBox}>
           <img
-            className="w-100"
+            className="w-100 cursor-pointer"
             src="https://d1j8r0kxyu9tj8.cloudfront.net/files/1614675291fYb1wovzSpV7URV.png"
             alt="logo"
+            onClick={() => {
+              navigate("/")
+            }}
           ></img>
         </div>
         <div className="d-flex">
-          <div className="me-3">Giới thiệu</div>
-          <div>Chỉnh HD Video</div>
+          <div className="me-3 cursor-pointer">Giới thiệu</div>
+          <div className="cursor-pointer">Chỉnh HD Video</div>
         </div>
         <div>
           <div id="dropdown-select-language" class="dropdown">

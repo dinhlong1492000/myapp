@@ -3,6 +3,9 @@ import "./styles/app.sass";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Page from "./components/Page";
 import Home from "./screens/Home";
+import EditVideo from "./screens/EditPage";
+import Payment from "./screens/Payment";
+
 
 function App() {
   return (
@@ -15,6 +18,24 @@ function App() {
             element={
               <Page>
                 <Home />
+              </Page>
+            }
+          ></Route>
+          <Route
+            exact
+            path="/edit-video"
+            element={
+              <Page>
+                <EditVideo />
+              </Page>
+            }
+          ></Route>
+          <Route
+            exact
+            path="/payment"
+            element={
+              <Page>
+                <Payment />
               </Page>
             }
           ></Route>
