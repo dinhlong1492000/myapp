@@ -11,11 +11,10 @@ const Home = () => {
         <div className="row justify-content-between align-items-center">
           <div className="col-5">
             <div className="fs-1 fw-bold">
-              Hãy làm cho các Video của bạn trở nên tốt nhất.
+              Make your videos better!
             </div>
-            <div>
-              Sao phải xem một Video chất lượng thấp trong khi bạn có thể khiến
-              nó trở nên tốt hơn. Cùng chúng tôi nâng cấp Video của bạn.
+            <div className="mt-3" >
+            Why watch a low quality video when you can make it better. Join us now to upgrade your video!
             </div>
           </div>
           <div className="col-6">
@@ -33,7 +32,7 @@ const Home = () => {
               navigate(`/edit-video`);
             }}
           >
-            Bắt đầu ngay
+            Get Started
           </div>
         </div>
         <div className="row justify-content-between mt-5">
@@ -64,9 +63,9 @@ const Home = () => {
           <div className="col-6 d-flex align-items-center">
             <div>
               
-            <div className=" fs-2 fw-bold">Đơn giản để sử dụng</div>
-            <div>
-              Chỉ với vài thao tác, bạn đã có thể nâng cấp video của mình!
+            <div className=" fs-2 fw-bold">Easy to Use</div>
+            <div className="mt-2">
+            Upgrade your video with only a few steps!
             </div>
             </div>
           </div>
@@ -74,7 +73,7 @@ const Home = () => {
       </div>
       <div className="row m-0 mt-5 justify-content-center d-flex">
         <div className="text-center fs-2 fw-bold text-white mt-5">
-          Những sản phẩm nổi bật
+          Our Featured Products
         </div>
         <div className="row g-3 justify-content-center">
           <div className="col-6">
@@ -121,7 +120,7 @@ const Home = () => {
         <div class="pc_landing_enjoy_video-bg-mask"></div>
         <div class={styles.videoText}>
           <h2 class="pc_landing_enjoy_video-content-title">
-            Start your video-creating journey now.
+            Start your video-enhancing journey now!
           </h2>
           <a
             href="/signup?enter_from=landing_page_bottom&amp;current_page=landing_page"

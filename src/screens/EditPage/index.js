@@ -24,7 +24,7 @@ const EditPage = () => {
                   {({ getRootProps, getInputProps }) => (
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
-                      <button>Chọn video</button>
+                      <button className="rounded border border-dark border-2 " >Chọn video</button>
                     </div>
                   )}
                 </Dropzone>
@@ -37,10 +37,10 @@ const EditPage = () => {
           <div>
             <div onClick={() => {
               navigate(`/payment`);
-            }} className={cn("border px-2 py-1 my-4 cursor-pointer", styles.btnFnc)}>HD Video</div>
+            }} className={cn("border px-2 py-1 my-4 cursor-pointer text-center", styles.btnFnc)}>HD Video</div>
             <div onClick={() => {
               navigate(`/payment`);
-            }} className={cn("border px-2 py-1 my-4 cursor-pointer", styles.btnFnc)}>Cắt nền</div>
+            }} className={cn("border px-2 py-1 my-4 cursor-pointer text-center", styles.btnFnc)}>Cắt nền</div>
           </div>
         </div>
       </div>

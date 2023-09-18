@@ -16,9 +16,12 @@ const Header = () => {
             }}
           ></img>
         </div>
-        <div className="d-flex">
-          <div className="me-3 cursor-pointer">Giới thiệu</div>
-          <div className="cursor-pointer">Chỉnh HD Video</div>
+        <div className="d-flex ">
+          <div className="me-4 cursor-pointer">Introduction</div>
+          <div className="cursor-pointer"
+            onClick={() => {
+              navigate(`/edit-video`);
+            }}>Upgrade Video</div>
         </div>
         <div>
           <div id="dropdown-select-language" class="dropdown">
@@ -30,7 +33,7 @@ const Header = () => {
               aria-expanded="false"
               id="dropdownMenu2"
             >
-              <span>Tiếng Việt (VI)</span>
+              <span>English (EN)</span>
             </button>
             <div
               class={cn("dropdown-menu top-head-item", styles.dropDownLanguage)}
