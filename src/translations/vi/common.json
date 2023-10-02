@@ -1,0 +1,24 @@
+{
+    "header" : {
+        "intro" : "Giới thiệu",
+        "start" : "Nâng cấp Video"
+    },
+    "footer" : {
+        "about" : "Về chúng tôi",
+        "intro" : "Giới thiệu",
+        "contact" : "Liên lạc",
+        "find" : "Tìm kiếm chúng tôi",
+        "hotline" : "Số điện thoại"
+    },
+    "home": {
+        "title": "Hãy làm cho video của bạn tốt hơn",
+        "why": "Tại sao phải xem video chất lượng thấp khi bạn có thể cải thiện nó. Hãy tham gia ngay với chúng tôi để nâng cấp video của bạn!",
+        "btn-start" : "Bắt đầu",
+        "section2" : {
+            "title" : "Dễ dàng sử dụng",
+            "description" : "Nâng cấp video của bạn chỉ với vài thao tác!"
+        },
+        "featured" : "Sản phẩm nổi bật của chúng tôi",
+        "enjoy": "Hãy bắt đầu hành trình nâng cao chất lượng video của bạn ngay bây giờ!"
+    }
+}

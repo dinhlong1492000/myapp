@@ -1,0 +1,24 @@
+{
+    "header" : {
+        "intro" : "Introduction",
+        "start" : "Upgrade Video"
+    },
+    "footer" : {
+        "about" : "About Us",
+        "intro" : "Introduction",
+        "contact" : "Contact",
+        "find" : "Find Us",
+        "hotline" : "Hotline"
+    },
+    "home": {
+        "title": "Make your videos better",
+        "why": "Why watch a low quality video when you can make it better. Join us now to upgrade your video!",
+        "btn-start" : "Get Started",
+        "section2" : {
+            "title" : "Easy to Use",
+            "description" : "Upgrade your video with only a few steps!"
+        },
+        "featured" : "Our Featured Products",
+        "enjoy": "Start your video-enhancing journey now!"
+    }
+}

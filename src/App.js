@@ -5,6 +5,7 @@ import Page from "./components/Page";
 import Home from "./screens/Home";
 import EditVideo from "./screens/EditPage";
 import Payment from "./screens/Payment";
+import { withTranslation, Trans } from 'react-i18next';
 
 
 function App() {
@@ -45,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default withTranslation('common')(App)

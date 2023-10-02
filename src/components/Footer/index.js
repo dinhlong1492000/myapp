@@ -1,6 +1,8 @@
 import styles from "./Footer.module.sass";
 import cn from "classnames";
+import { useTranslation } from "react-i18next";
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className={cn("pb-3 pt-5")}>
       <div className="d-flex container justify-content-between text-white">
@@ -14,12 +16,12 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <div className="fs-4 mb-3">About Us</div>
+          <div className="fs-4 mb-3">{t('footer.about')}</div>
           <div>
-            Introduction
+            {t("footer.intro")}
           </div>
           <div>
-            Contact
+          {t("footer.contact")}
           </div>
           {/* <div>
             Chỉnh video
@@ -29,11 +31,15 @@ const Footer = () => {
           </div> */}
         </div>
         <div>
-          <div className="fs-4 mb-3">Find Us</div>
+          <div className="fs-4 mb-3">
+            {t("footer.find")}
+          </div>
           <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-</svg> <span>Hotline : 1900ABCD</span>
+</svg> <span>
+  {t("footer.hotline")}
+</span>
           </div>
           <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
