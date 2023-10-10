@@ -4,6 +4,7 @@ import Dropzone from "react-dropzone";
 import ReactPlayer from "react-player";
 import styles from "./EditPage.module.sass";
 import cn from "classnames";
+import { useTranslation } from "react-i18next";
 
 const EditPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const EditPage = () => {
     setVideoUrl(videoBlob);
   }, []);
 
-  console.log(videoUrl);
+  const { t } = useTranslation();
 
   // const { getRootProps, getInputProps } = useDropzone({
   //   onDrop,
@@ -57,8 +58,8 @@ const EditPage = () => {
               {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-                  <button className="rounded border border-dark border-2 ">
-                    Chọn video
+                  <button className={cn("rounded border px-2 py-1 w-100",styles.btnFnc)}>
+                    {t("editPage.btnChoose")}
                   </button>
                 </div>
               )}
@@ -72,7 +73,7 @@ const EditPage = () => {
                 styles.btnFnc
               )}
             >
-              HD Video
+              {t("editPage.btnEdit")}
             </div>
             <div
               onClick={() => {
@@ -83,7 +84,7 @@ const EditPage = () => {
                 styles.btnFnc
               )}
             >
-              Cắt nền
+              {t("editPage.btnCut")}
             </div>
           </div>
         </div>

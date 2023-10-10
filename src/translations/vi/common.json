@@ -20,5 +20,10 @@
         },
         "featured" : "Sản phẩm nổi bật của chúng tôi",
         "enjoy": "Hãy bắt đầu hành trình nâng cao chất lượng video của bạn ngay bây giờ!"
+    },
+    "editPage": {
+        "btnChoose": "Chọn video",
+        "btnEdit": "HD Video",
+        "btnCut": "Cắt nền"
     }
 }

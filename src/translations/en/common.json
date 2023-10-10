@@ -20,5 +20,10 @@
         },
         "featured" : "Our Featured Products",
         "enjoy": "Start your video-enhancing journey now!"
+    },
+    "editPage": {
+        "btnChoose": "Select video",
+        "btnEdit": "HD Video",
+        "btnCut": "Background removal"
     }
 }
