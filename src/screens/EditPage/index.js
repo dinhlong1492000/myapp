@@ -1,51 +1,125 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
-import ReactPlayer from "react-player";
 import styles from "./EditPage.module.sass";
+import axios from "axios";
 import cn from "classnames";
-import { useTranslation } from "react-i18next";
 
 const EditPage = () => {
   const navigate = useNavigate();
-  const [video, setVideo] = useState(null);
+  const [image, setImage] = useState(null);
 
-  const handleDrop = (acceptedFiles) => {
-    setVideo(URL.createObjectURL(acceptedFiles[0]));
-  };
-
-  const [videoUrl, setVideoUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    const file = acceptedFiles[0]; // Giả sử chỉ cho phép chọn một video
+    const file = acceptedFiles[0]; // Assume only one image file is selected
 
-    // Đọc tệp video và tạo URL đối tượng blob để hiển thị
-    const videoBlob = URL.createObjectURL(file);
-    setVideoUrl(videoBlob);
+    // Read the image file and create a blob URL to display
+    const imageBlob = URL.createObjectURL(file);
+    setImageUrl(imageBlob);
+    setImage(acceptedFiles);
   }, []);
 
-  const { t } = useTranslation();
+  console.log(imageUrl);
+  console.log(image);
 
-  // const { getRootProps, getInputProps } = useDropzone({
-  //   onDrop,
-  //   accept: 'video/*', // Chỉ cho phép chọn các tệp video
-  // });
+  // const convertFileToBase64 = (file) => {
+  //   debugger
+  //   return new Promise((resolve, reject) => {
+  //     debugger
+  //     const reader = new FileReader();
+  
+  //     reader.onload = function () {
+  //       const base64String = reader.result;
+  //       resolve(base64String);
+  //     };
+  
+  //     reader.onerror = function (error) {
+  //       reject(error);
+  //     };
+  
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
+  
+  // const enhanceImage = useCallback(async () => {
+  //   try {
+  //     const file = image[0];
+  //     const formData = new FormData();
+  //     formData.append("image", file);
+  
+  //     const response = await axios.post(
+  //       "http://localhost:8080/process-image",
+  //       formData
+  //     );
+  
+  //     const base64Image = await convertFileToBase64(
+  //       new Blob([response?.data?.data], { type: file.type })
+  //     );
+  
+  //     setImageUrl(base64Image);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // }, [image]);
+
+  const convertFileToBase64 = (file) => {
+    debugger
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = function () {
+        const base64String = reader.result;
+        resolve(base64String);
+      };
+  
+      reader.onerror = function (error) {
+        reject(error);
+      };
+  
+      // Sử dụng readAsArrayBuffer nếu dữ liệu trả về từ BE là binary
+      reader.readAsArrayBuffer(file);
+    });
+  };
+  
+  const enhanceImage = useCallback(async () => {
+    try {
+      const file = image[0];
+      const formData = new FormData();
+      formData.append("image", file);
+  
+      const response = await axios.post(
+        "http://localhost:8080/process-image",
+        formData,
+        {
+          responseType: "arraybuffer",
+        }
+      );
+  
+      const arrayBufferView = new Uint8Array(response.data);
+      const blob = new Blob([arrayBufferView], { type: file.type });
+      const imageUrl = URL.createObjectURL(blob);
+  
+      setImageUrl(imageUrl);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }, [image]);
+  
 
   return (
     <>
       <div className="bg-white d-flex py-5 ps-3">
         <div className={cn("col-9 border rounded", styles.editBox)}>
           <div className={cn(styles.editFrame, "h-100")}>
-            <div id="video-container" className="h-100">
+            <div id="image-container" className="h-100">
               <div className="h-100">
-                {videoUrl && (
-                  <ReactPlayer
-                    url={videoUrl}
-                    width="100%"
-                    height="100%"
-                    playing={true}
-                    controls={false}
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt="Selected Image"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 )}
               </div>
@@ -58,22 +132,22 @@ const EditPage = () => {
               {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-                  <button className={cn("rounded border px-2 py-1 w-100",styles.btnFnc)}>
-                    {t("editPage.btnChoose")}
+                  <button className="rounded border border-dark border-2 ">
+                    Chọn ảnh
                   </button>
                 </div>
               )}
             </Dropzone>
             <div
               onClick={() => {
-                navigate(`/payment`);
+                enhanceImage();
               }}
               className={cn(
                 "border px-2 py-1 my-4 cursor-pointer text-center",
                 styles.btnFnc
               )}
             >
-              {t("editPage.btnEdit")}
+              Xử lý ảnh
             </div>
             <div
               onClick={() => {
@@ -84,7 +158,7 @@ const EditPage = () => {
                 styles.btnFnc
               )}
             >
-              {t("editPage.btnCut")}
+              Cắt nền
             </div>
           </div>
         </div>
@@ -94,45 +168,3 @@ const EditPage = () => {
 };
 
 export default EditPage;
-
-// import React, { useCallback, useState } from 'react';
-// import { useDropzone } from 'react-dropzone';
-// import axios from 'axios';
-
-// function EditPage() {
-//   const [videoUrl, setVideoUrl] = useState(null);
-
-//   const onDrop = useCallback((acceptedFiles) => {
-//     const file = acceptedFiles[0]; // Giả sử chỉ cho phép chọn một video
-
-//     // Đọc tệp video và tạo URL đối tượng blob để hiển thị
-//     const videoBlob = URL.createObjectURL(file);
-//     setVideoUrl(videoBlob);
-//   }, []);
-
-//   const { getRootProps, getInputProps } = useDropzone({
-//     onDrop,
-//     accept: 'video/*', // Chỉ cho phép chọn các tệp video
-//   });
-
-//   return (
-//     <div>
-//       {videoUrl ? (
-//         <div>
-//           <p>Video đã chọn:</p>
-//           <video controls autoPlay>
-//             <source src={videoUrl} type="video/mp4" />
-//             Trình duyệt của bạn không hỗ trợ thẻ video.
-//           </video>
-//         </div>
-//       ) : (
-//         <div {...getRootProps()}>
-//           <input {...getInputProps()} />
-//           <p>Kéo và thả video vào đây hoặc nhấn để chọn video</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default EditPage;
