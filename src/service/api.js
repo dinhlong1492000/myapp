@@ -1,5 +1,7 @@
 import authApi from "./config/authApi.config";
 import publicApi from "./config/publicApi.config";
+import baseUrl from "./config/baseUrl";
+
 
 export const getQRCode = (amount) =>
   authApi({
@@ -15,3 +17,13 @@ export const getQRCode = (amount) =>
       template: "compact",
     },
   });
+
+export const enhanceImage = (data) =>
+    authApi({
+      method: "POST",
+      url: `/upload-image`,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data,
+    });

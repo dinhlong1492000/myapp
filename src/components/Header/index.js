@@ -25,12 +25,28 @@ const Header = () => {
         <div className="d-flex ">
           <div className="me-4 cursor-pointer">{t("header.intro")}</div>
           <div
-            className="cursor-pointer"
+            className="cursor-pointer mx-5"
             onClick={() => {
               navigate(`/edit-video`);
             }}
           >
-            {t("header.start")}
+            {t("header.enhanceVideo")}
+          </div>
+          <div
+            className="cursor-pointer me-5"
+            onClick={() => {
+              navigate(`/edit-image`);
+            }}
+          >
+            {t("header.enhanceImage")}
+          </div>
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              navigate(`/edit-backgroundImage`);
+            }}
+          >
+            {t("header.synthesisImage")}
           </div>
         </div>
         <div>

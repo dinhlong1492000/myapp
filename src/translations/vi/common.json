@@ -1,7 +1,9 @@
 {
     "header" : {
         "intro" : "Giới thiệu",
-        "start" : "Nâng cấp Video"
+        "enhanceVideo" : "Nâng cấp Video",
+        "enhanceImage" : "Nâng cấp Ảnh",
+        "synthesisImage" : "Tạo mới nền ảnh"
     },
     "footer" : {
         "about" : "Về chúng tôi",

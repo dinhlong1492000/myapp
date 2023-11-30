@@ -1,7 +1,9 @@
 {
     "header" : {
         "intro" : "Introduction",
-        "start" : "Upgrade Video"
+        "enhanceVideo" : "Upgrade Video",
+        "enhanceImage" : "Upgrade Image",
+        "synthesisImage" : "Background image synthesis"
     },
     "footer" : {
         "about" : "About Us",

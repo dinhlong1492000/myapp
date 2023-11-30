@@ -3,11 +3,13 @@ import "./styles/app.sass";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Page from "./components/Page";
 import Home from "./screens/Home";
-import EditVideo from "./screens/EditPage";
+// import EditVideo from "./screens/EditPage";
 import Payment from "./screens/Payment";
+import EditImagePage from "./screens/EditImagePage";
+import SynthesisImage from "./screens/SynthesisImage";
+import EditVideoPage from "./screens/EditVideoPage";
 import { withTranslation, Trans } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,10 +37,28 @@ function App() {
             ></Route>
             <Route
               exact
+              path="/edit-image"
+              element={
+                <Page>
+                  <EditImagePage />
+                </Page>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/edit-backgroundImage"
+              element={
+                <Page>
+                  <SynthesisImage />
+                </Page>
+              }
+            ></Route>
+            <Route
+              exact
               path="/edit-video"
               element={
                 <Page>
-                  <EditVideo />
+                  <EditVideoPage />
                 </Page>
               }
             ></Route>
