@@ -68,7 +68,7 @@ const SynthesisImage = () => {
       if (!resultImage) {
         throw new Error("Invalid image data");
       }
-
+      debugger
       // Tạo một đối tượng Blob từ đường dẫn của ảnh
       const blob = await fetch(resultImage).then((r) => r.blob());
 
@@ -193,12 +193,12 @@ const SynthesisImage = () => {
                   </div>
                   <div className="col-4 text-end pe-4 cursor-pointer">
                     <div className="row justify-content-center align-items-center h-100">
-                      <button
-                        className={cn(styles.inputUpload)}
+                      <div
+                        className={cn(styles.inputUpload,'justify-content-center align-items-center d-flex')}
                         onClick={() => downloadImage()}
                       >
-                        <MdDownload /> Download
-                      </button>
+                        <MdDownload  className="me-2 lh-lg mt-1"/> Download
+                      </div>
                     </div>
                   </div>
                 </div>
