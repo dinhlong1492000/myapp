@@ -9,7 +9,7 @@ import { IoMdClose } from "react-icons/io";
 import CardProcessing from "../../components/CardProcessing";
 import { MdDownload } from "react-icons/md";
 
-import { enhanceImage } from "../../service/api";
+import { enhanceImage, synthesisImage } from "../../service/api";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import TextArea from "../../components/TextArea";
@@ -25,14 +25,13 @@ const SynthesisImage = () => {
 
   const [resultImage, setResult] = useState();
 
-  const enhanceImageMutation = useMutation(
-    async (file) => {
-      return enhanceImage({ image: file });
+  const synthesisImageMutation = useMutation(
+    async (data) => {
+      return synthesisImage(data);
     },
     {
       onSuccess: (data) => {
-        debugger;
-        setResult(data?.data?.data);
+        setResult(data?.data?.data[1]);
       },
     }
   );
@@ -46,27 +45,22 @@ const SynthesisImage = () => {
       const imageBlob = URL.createObjectURL(file);
       setImageUrl(imageBlob);
       setImage(acceptedFiles);
-      console.log("call");
-      //gọi api
-      // enhanceImageMutation.mutate(file, {
-      //   onSuccess: (data) => {
-      //     // queryClient.invalidateQueries({
-      //     //   queryKey: ['users'],
-      //     // });
-      //     toast.success("Video enhanced");
-      //   },
-      // });
     },
     []
   );
-  console.log(image);
-
   // const handleRun = useCallback(() => )
   const handleSubmit = useCallback((data) => {
-    debugger
-    console.log(data);
-    console.log(image);
-  }, [image])
+    const dataRequest = {
+      image: image[0],
+      negative_prompt:data?.negativePrompt,
+      prompt: data?.prompt
+    }
+    synthesisImageMutation.mutate(dataRequest, {
+        onSuccess: (data) => {
+          toast.success("Image enhanced");
+        },
+      });
+  }, [image, synthesisImageMutation])
 
   const downloadImage = async () => {
     try {
@@ -158,9 +152,9 @@ const SynthesisImage = () => {
                 <div className="row">
                   <div className="col-4 text-center">Original</div>
                   <div className="col-4 text-center">Result</div>
-                  <div className="col-4 text-end pe-4 cursor-pointer">
+                  {/* <div className="col-4 text-end pe-4 cursor-pointer">
                     <IoMdClose />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row">
                   <div className="col-4 text-center">
@@ -180,7 +174,7 @@ const SynthesisImage = () => {
                   </div>
                   <div className="col-4 text-center d-flex justify-content-center align-items-center">
                     <div className="w-100 text-center  d-flex justify-content-center align-items-center">
-                      {enhanceImageMutation.isSuccess ? (
+                      {synthesisImageMutation.isSuccess ? (
                         <img
                           src={resultImage}
                           alt="Selected Images"
@@ -190,7 +184,7 @@ const SynthesisImage = () => {
                             objectFit: "cover",
                           }}
                         />
-                      ) : enhanceImageMutation.isLoading ? (
+                      ) : synthesisImageMutation.isLoading ? (
                         <CardProcessing color={"black"} type={"spin"} />
                       ) : (
                         <div></div>

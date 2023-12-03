@@ -29,7 +29,6 @@ const EditVideoPage = () => {
     },
     {
       onSuccess: (data) => {
-        debugger;
         setResult(data?.data?.data);
       },
     }

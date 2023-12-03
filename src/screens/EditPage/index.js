@@ -84,7 +84,6 @@ const EditPage = () => {
   // };
 
   function hexToBase64(str) {
-    debugger;
     return btoa(
       String.fromCharCode.apply(
         null,
@@ -114,7 +113,6 @@ const EditPage = () => {
       // const arrayBufferView = new Uint8Array(response.data);
       // const blob = new Blob([arrayBufferView], { type: file.type });
       // const imageUrl = URL.createObjectURL(blob);
-      debugger;
       let src = "data:image/jpeg;base64," + hexToBase64(response?.data?.data);
       console.log(src);
       setImageUrl(src);

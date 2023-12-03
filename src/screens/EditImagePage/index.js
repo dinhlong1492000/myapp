@@ -28,7 +28,6 @@ const EditImagePage = () => {
     },
     {
       onSuccess: (data) => {
-        debugger;
         setResult(data?.data?.data);
       },
     }
