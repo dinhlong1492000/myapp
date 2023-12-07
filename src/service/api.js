@@ -27,6 +27,16 @@ export const enhanceImage = (data) =>
     data,
   });
 
+  export const enhanceVideo = (data) =>
+  authApi({
+    method: "POST",
+    url: `/upload-video`,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    data,
+  });
+
 export const synthesisImage = (data) =>
   authApi({
     method: "POST",

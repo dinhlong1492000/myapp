@@ -4,7 +4,7 @@ import cn from "classnames";
 import { useQuery } from "@tanstack/react-query";
 import { getQRCode } from "../../service/api";
 
-const Payment = () => {
+const Payment = ({ setStatusPayment, setVisible }) => {
   const [video, setVideo] = useState(null);
 
   const handleDrop = (acceptedFiles) => {
@@ -45,7 +45,15 @@ const Payment = () => {
             <img className="w-100" src={qr} alt="qr" />
           </div>
         </div>
-        <div>Show Notifications</div>
+        <button
+          onClick={() => {
+            setStatusPayment(true);
+            setVisible(false);
+          }}
+          className="btn mt-3"
+        >
+          Xác thực thanh toán
+        </button>
       </div>
     </>
   );

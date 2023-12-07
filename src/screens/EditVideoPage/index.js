@@ -10,25 +10,33 @@ import { IoMdClose } from "react-icons/io";
 import CardProcessing from "../../components/CardProcessing";
 import { MdDownload } from "react-icons/md";
 
-import { enhanceImage } from "../../service/api";
+import { enhanceImage, enhanceVideo } from "../../service/api";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import ReactPlayer from "react-player";
 import { useContext } from "react";
 import { LanguageContext } from "../../components/TranslateComponent";
+import ModalWithoutPortal from "../../components/ModalWithoutPortal";
+import Payment from "../Payment";
 
 const EditVideoPage = () => {
   const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
+
+  const [visible, setVisible] = useState(false);
+
+  const [statusPayment, setStatusPayment] = useState(false);
+
+
   const [video, setVideo] = useState(null);
 
   const [videoUrl, setVideoUrl] = useState(null);
 
-  const [resultImage, setResult] = useState();
+  const [resultVideo, setResult] = useState();
 
-  const enhanceImageMutation = useMutation(
+  const enhanceVideoMutation = useMutation(
     async (file) => {
-      return enhanceImage({ image: file });
+      return enhanceVideo({ video: file });
     },
     {
       onSuccess: (data) => {
@@ -45,30 +53,33 @@ const EditVideoPage = () => {
     setVideo(acceptedFiles);
     console.log("call");
     //gọi api
-    // enhanceImageMutation.mutate(file, {
-    //   onSuccess: (data) => {
-    //     // queryClient.invalidateQueries({
-    //     //   queryKey: ['users'],
-    //     // });
-    //     toast.success("Video enhanced");
-    //   },
-    // });
+    enhanceVideoMutation.mutate(file, {
+      onSuccess: (data) => {
+        // queryClient.invalidateQueries({
+        //   queryKey: ['users'],
+        // });
+        toast.success("Video enhanced");
+      },
+    });
   }, []);
 
-  const downloadImage = async () => {
+  const downloadVideo = async () => {
     try {
-      // Kiểm tra xem có dữ liệu hợp lệ không
-      if (!resultImage) {
-        throw new Error("Invalid image data");
+        console.log('download');
+         // Kiểm tra xem có dữ liệu hợp lệ không
+      if (!resultVideo) {
+        throw new Error("Invalid video data");
       }
 
-      // Tạo một đối tượng Blob từ đường dẫn của ảnh
-      const blob = await fetch(resultImage).then((r) => r.blob());
+      // Tạo một đối tượng Blob từ đường dẫn của video
+      const blob = await fetch(resultVideo).then((r) => r.blob());
 
       // Tạo một đường link (a) để download
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = "downloaded_image.jpg"; // Tên file khi được download
+
+      // Đặt tên file video khi được download (thay "downloaded_video.mp4" bằng tên mong muốn và đuôi mở rộng của video)
+      link.download = "downloaded_video.mp4";
 
       // Thêm đường link vào DOM và kích hoạt sự kiện click để bắt đầu download
       document.body.appendChild(link);
@@ -76,12 +87,27 @@ const EditVideoPage = () => {
 
       // Xóa đường link khỏi DOM sau khi đã download
       document.body.removeChild(link);
+      setStatusPayment(false)
     } catch (error) {
-      console.error("Error downloading image:", error);
+      console.error("Error downloading video:", error);
     }
   };
+
+  const handleDownload = useCallback(() => {
+    //mở component thanh toán
+    setVisible(true)
+    console.log(1);
+  });
+  console.log("load");
+  console.log(statusPayment);
+
+  statusPayment && resultVideo && downloadVideo()
+
   return (
     <>
+      <ModalWithoutPortal visible={visible} onClose={() => setVisible(false)}>
+        <Payment setStatusPayment={setStatusPayment} setVisible={setVisible}/>
+      </ModalWithoutPortal>
       <div
         className={cn(
           "d-flex flex-column align-items-center justify-content-center",
@@ -107,14 +133,8 @@ const EditVideoPage = () => {
         {videoUrl && (
           <div className={cn(styles.cardResult, "w-75 my-5")}>
             <div className="row">
-              <div className="col-4 text-center">
-              {t("editVideo.original")}
-                
-                </div>
-              <div className="col-4 text-center">
-              {t("editVideo.result")}
-
-                </div>
+              <div className="col-4 text-center">{t("editVideo.original")}</div>
+              <div className="col-4 text-center">{t("editVideo.result")}</div>
               <div className="col-4 text-end pe-4 cursor-pointer">
                 <IoMdClose />
               </div>
@@ -135,15 +155,13 @@ const EditVideoPage = () => {
               </div>
               <div className="col-4 text-center d-flex justify-content-center align-items-center">
                 <div className="w-100 text-center  d-flex justify-content-center align-items-center">
-                  {resultImage ? (
-                    <img
-                      src={resultImage}
-                      alt="Selected Images"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
+                  {resultVideo ? (
+                    <ReactPlayer
+                      url={resultVideo}
+                      width="100%"
+                      height="100%"
+                      playing={true}
+                      controls={false}
                     />
                   ) : (
                     <CardProcessing color={"black"} type={"spin"} />
@@ -154,9 +172,9 @@ const EditVideoPage = () => {
                 <div className="row justify-content-center align-items-center h-100">
                   <button
                     className={cn(styles.inputUpload)}
-                    onClick={() => downloadImage()}
+                    onClick={() => handleDownload()}
                   >
-                    <MdDownload /> 
+                    <MdDownload />
                     {t("editVideo.btnDownload")}
                   </button>
                 </div>

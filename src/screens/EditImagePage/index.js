@@ -19,8 +19,6 @@ import { LanguageContext } from "../../components/TranslateComponent";
 const EditImagePage = () => {
 
   const { t } = useContext(LanguageContext);
-
-
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
 
@@ -28,8 +26,12 @@ const EditImagePage = () => {
 
   const [resultImage, setResult] = useState();
 
+/**
+ * gọi api
+ * 
+ */
   const enhanceImageMutation = useMutation(
-    async (file) => {
+    (file) => {
       return enhanceImage({ image: file });
     },
     {
@@ -46,7 +48,6 @@ const EditImagePage = () => {
       const imageBlob = URL.createObjectURL(file);
       setImageUrl(imageBlob);
       setImage(acceptedFiles);
-      console.log("call");
       //gọi api
       enhanceImageMutation.mutate(file, {
         onSuccess: (data) => {
@@ -119,9 +120,9 @@ const EditImagePage = () => {
               <div className="col-4 text-center">
                 {t("editImage.result")}
               </div>
-              <div className="col-4 text-end pe-4 cursor-pointer">
+              {/* <div className="col-4 text-end pe-4 cursor-pointer">
                 <IoMdClose />
-              </div>
+              </div> */}
             </div>
             <div className="row">
               <div className="col-4 text-center">
