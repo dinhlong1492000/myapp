@@ -10,6 +10,7 @@ import SynthesisImage from "./screens/SynthesisImage";
 import EditVideoPage from "./screens/EditVideoPage";
 import { withTranslation, Trans } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TranslateComponent } from "./components/TranslateComponent";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,53 +26,55 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <Page>
-                  <Home />
-                </Page>
-              }
-            ></Route>
-            <Route
-              exact
-              path="/edit-image"
-              element={
-                <Page>
-                  <EditImagePage />
-                </Page>
-              }
-            ></Route>
-            <Route
-              exact
-              path="/edit-backgroundImage"
-              element={
-                <Page>
-                  <SynthesisImage />
-                </Page>
-              }
-            ></Route>
-            <Route
-              exact
-              path="/edit-video"
-              element={
-                <Page>
-                  <EditVideoPage />
-                </Page>
-              }
-            ></Route>
-            <Route
-              exact
-              path="/payment"
-              element={
-                <Page>
-                  <Payment />
-                </Page>
-              }
-            ></Route>
-          </Routes>
+          <TranslateComponent>
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={
+                  <Page>
+                    <Home />
+                  </Page>
+                }
+              ></Route>
+              <Route
+                exact
+                path="/edit-image"
+                element={
+                  <Page>
+                    <EditImagePage />
+                  </Page>
+                }
+              ></Route>
+              <Route
+                exact
+                path="/edit-backgroundImage"
+                element={
+                  <Page>
+                    <SynthesisImage />
+                  </Page>
+                }
+              ></Route>
+              <Route
+                exact
+                path="/edit-video"
+                element={
+                  <Page>
+                    <EditVideoPage />
+                  </Page>
+                }
+              ></Route>
+              <Route
+                exact
+                path="/payment"
+                element={
+                  <Page>
+                    <Payment />
+                  </Page>
+                }
+              ></Route>
+            </Routes>
+          </TranslateComponent>
         </BrowserRouter>
       </QueryClientProvider>
     </>

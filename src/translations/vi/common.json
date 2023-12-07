@@ -27,5 +27,30 @@
         "btnChoose": "Chọn video",
         "btnEdit": "HD Video",
         "btnCut": "Cắt nền"
+    },
+    "editVideo": {
+        "enhanceVideo": "Nâng cấp Video",
+        "btnUpload": "Tải Video",
+        "original": "Video gốc",
+        "result": "Video kết quả",
+        "btnDownload": "Tải xuống"
+    },
+    "editImage": {
+        "enhanceImage": "Nâng cấp ảnh",
+        "btnUpload": "Tải ảnh",
+        "original": "Ảnh gốc",
+        "result": "Ảnh kết quả",
+        "btnDownload": "Tải xuống"
+
+    },
+    "synthesisImage": {
+        "backgroundGenerator": "Sinh nền ảnh",
+        "btnUpload": "Tải ảnh",
+        "original": "Ảnh gốc",
+        "result": "Ảnh kết quả",
+        "btnDownload": "Tải xuống",
+        "prompt": "Yêu cầu ảnh có",
+        "negativePrompt": "Yêu cầu ảnh không có",
+        "btnRun": "Chạy"
     }
 }

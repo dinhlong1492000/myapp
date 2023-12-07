@@ -14,8 +14,11 @@ import { enhanceImage } from "../../service/api";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import ReactPlayer from "react-player";
+import { useContext } from "react";
+import { LanguageContext } from "../../components/TranslateComponent";
 
 const EditVideoPage = () => {
+  const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
   const [video, setVideo] = useState(null);
 
@@ -34,26 +37,23 @@ const EditVideoPage = () => {
     }
   );
 
-  const onDrop = useCallback(
-    (acceptedFiles) => {
-      const file = acceptedFiles[0]; // Assume only one image file is selected
-      // Read the image file and create a blob URL to display
-      const imageBlob = URL.createObjectURL(file);
-      setVideoUrl(imageBlob);
-      setVideo(acceptedFiles);
-      console.log("call");
-      //gọi api
-      // enhanceImageMutation.mutate(file, {
-      //   onSuccess: (data) => {
-      //     // queryClient.invalidateQueries({
-      //     //   queryKey: ['users'],
-      //     // });
-      //     toast.success("Video enhanced");
-      //   },
-      // });
-    },
-    [enhanceImageMutation]
-  );
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0]; // Assume only one image file is selected
+    // Read the image file and create a blob URL to display
+    const imageBlob = URL.createObjectURL(file);
+    setVideoUrl(imageBlob);
+    setVideo(acceptedFiles);
+    console.log("call");
+    //gọi api
+    // enhanceImageMutation.mutate(file, {
+    //   onSuccess: (data) => {
+    //     // queryClient.invalidateQueries({
+    //     //   queryKey: ['users'],
+    //     // });
+    //     toast.success("Video enhanced");
+    //   },
+    // });
+  }, []);
 
   const downloadImage = async () => {
     try {
@@ -88,14 +88,17 @@ const EditVideoPage = () => {
           styles.boxPage
         )}
       >
-        <div className="fs-1 text-dark fw-bold py-5 lh-lg">Video Enhancer</div>
+        <div className="fs-1 text-dark fw-bold py-5 lh-lg">
+          {t("editVideo.enhanceVideo")}
+        </div>
         <div className={cn("", styles.inputBox)}>
           <Dropzone onDrop={onDrop}>
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 <button className={cn(styles.inputUpload)}>
-                  <MdFileUpload /> Upload Video
+                  <MdFileUpload />
+                  {t("editVideo.btnUpload")}
                 </button>
               </div>
             )}
@@ -104,8 +107,14 @@ const EditVideoPage = () => {
         {videoUrl && (
           <div className={cn(styles.cardResult, "w-75 my-5")}>
             <div className="row">
-              <div className="col-4 text-center">Original</div>
-              <div className="col-4 text-center">Result</div>
+              <div className="col-4 text-center">
+              {t("editVideo.original")}
+                
+                </div>
+              <div className="col-4 text-center">
+              {t("editVideo.result")}
+
+                </div>
               <div className="col-4 text-end pe-4 cursor-pointer">
                 <IoMdClose />
               </div>
@@ -113,15 +122,15 @@ const EditVideoPage = () => {
             <div className="row">
               <div className="col-4 text-center">
                 <div>
-                {videoUrl && (
-                  <ReactPlayer
-                    url={videoUrl}
-                    width="100%"
-                    height="100%"
-                    playing={true}
-                    controls={false}
-                  />
-                )}
+                  {videoUrl && (
+                    <ReactPlayer
+                      url={videoUrl}
+                      width="100%"
+                      height="100%"
+                      playing={true}
+                      controls={false}
+                    />
+                  )}
                 </div>
               </div>
               <div className="col-4 text-center d-flex justify-content-center align-items-center">
@@ -147,7 +156,8 @@ const EditVideoPage = () => {
                     className={cn(styles.inputUpload)}
                     onClick={() => downloadImage()}
                   >
-                    <MdDownload /> Download
+                    <MdDownload /> 
+                    {t("editVideo.btnDownload")}
                   </button>
                 </div>
               </div>

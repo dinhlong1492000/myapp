@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 const Header = () => {
   const navigate = useNavigate();
-  const language = useRef('Tiếng Anh (EN)');
+  const language = useRef('English (EN)');
   // const { t, i18n } = this.props;
   const { t, i18n } = useTranslation();
   return (
@@ -58,9 +58,9 @@ const Header = () => {
               (language.current = value)
             }}
             // onBlur={onBlur}
-            options={["Tiếng Anh (EN)", "Tiếng Việt (VI)"]}
+            options={["English (EN)", "Tiếng Việt (VI)"]}
             onChangeData={(value) => {
-              if (value === 'Tiếng Anh (EN)') {
+              if (value === 'English (EN)') {
                 i18n.changeLanguage('en')
               } else {
                 i18n.changeLanguage('vi')

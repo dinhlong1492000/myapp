@@ -13,8 +13,14 @@ import { MdDownload } from "react-icons/md";
 import { enhanceImage } from "../../service/api";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { LanguageContext } from "../../components/TranslateComponent";
 
 const EditImagePage = () => {
+
+  const { t } = useContext(LanguageContext);
+
+
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
 
@@ -87,14 +93,18 @@ const EditImagePage = () => {
           styles.boxPage
         )}
       >
-        <div className="fs-1 text-dark fw-bold py-5 lh-lg">Photo Enhancer</div>
+        <div className="fs-1 text-dark fw-bold py-5 lh-lg">
+        {t("editImage.enhanceImage")}
+          
+          </div>
         <div className={cn("", styles.inputBox)}>
           <Dropzone onDrop={onDrop}>
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 <button className={cn(styles.inputUpload)}>
-                  <MdFileUpload /> Upload Image
+                  <MdFileUpload />
+                  {t("editImage.btnUpload")}
                 </button>
               </div>
             )}
@@ -103,8 +113,12 @@ const EditImagePage = () => {
         {imageUrl && (
           <div className={cn(styles.cardResult, "w-75 my-5")}>
             <div className="row">
-              <div className="col-4 text-center">Original</div>
-              <div className="col-4 text-center">Result</div>
+              <div className="col-4 text-center">
+                {t("editImage.original")}
+              </div>
+              <div className="col-4 text-center">
+                {t("editImage.result")}
+              </div>
               <div className="col-4 text-end pe-4 cursor-pointer">
                 <IoMdClose />
               </div>
@@ -148,7 +162,8 @@ const EditImagePage = () => {
                     className={cn(styles.inputUpload)}
                     onClick={() => downloadImage()}
                   >
-                    <MdDownload /> Download
+                    <MdDownload /> 
+                    {t("editImage.btnDownload")}
                   </button>
                 </div>
               </div>

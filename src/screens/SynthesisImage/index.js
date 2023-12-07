@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import styles from "./SynthesisImage.module.sass";
@@ -15,8 +15,10 @@ import { toast } from "react-toastify";
 import TextArea from "../../components/TextArea";
 
 import { FormProvider, useForm } from "react-hook-form";
+import { LanguageContext } from "../../components/TranslateComponent";
 
 const SynthesisImage = () => {
+  const {t} = useContext(LanguageContext)
   const navigate = useNavigate();
 
   const [image, setImage] = useState(null);
@@ -68,7 +70,6 @@ const SynthesisImage = () => {
       if (!resultImage) {
         throw new Error("Invalid image data");
       }
-      debugger
       // Tạo một đối tượng Blob từ đường dẫn của ảnh
       const blob = await fetch(resultImage).then((r) => r.blob());
 
@@ -99,7 +100,7 @@ const SynthesisImage = () => {
             )}
           >
             <div className="fs-1 text-dark fw-bold py-5 lh-lg">
-              Photo Enhancer
+              {t('synthesisImage.backgroundGenerator')}
             </div>
             <div className="d-flex">
               <div className={cn("", styles.inputBox)}>
@@ -111,7 +112,8 @@ const SynthesisImage = () => {
                         
                       />
                       <div className={cn(styles.inputUpload, 'd-flex justify-content-center align-items-center cursor-pointer')}>
-                        <MdFileUpload className="me-3"/> Upload Image
+                        <MdFileUpload className="me-3"/>
+                        {t('synthesisImage.btnUpload')}
                       </div>
                     </div>
                   )}
@@ -122,7 +124,7 @@ const SynthesisImage = () => {
               <div className={cn(styles.cardResult, "w-75 my-5")}>
                 <div className="ms-4 pb-3 mb-3 border-bottom d-flex justify-content-between align-items-center">
                   <div className="col-4">
-                    <div className="text-dark fs-5 fw-bold">Prompt:</div>
+                    <div className="text-dark fs-5 fw-bold">{t("synthesisImage.prompt")}:</div>
                     <textarea
                       id="story"
                       name="story"
@@ -133,7 +135,7 @@ const SynthesisImage = () => {
                   </div>
                   <div className="col-4">
                     <div className="text-dark fs-5 fw-bold">
-                      Negative Prompt:
+                      {t("synthesisImage.negativePrompt")}:
                     </div>
                     <textarea
                       id="story"
@@ -145,13 +147,13 @@ const SynthesisImage = () => {
                   </div>
                   <div className="col-2">
                     <button className={"px-2 py-1 bg-dark text-white fs-5"}>
-                      Run
+                      {t("synthesisImage.btnRun")}
                     </button>
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-4 text-center">Original</div>
-                  <div className="col-4 text-center">Result</div>
+                  <div className="col-4 text-center">{t("synthesisImage.original")}</div>
+                  <div className="col-4 text-center">{t("synthesisImage.result")}</div>
                   {/* <div className="col-4 text-end pe-4 cursor-pointer">
                     <IoMdClose />
                   </div> */}
@@ -197,7 +199,8 @@ const SynthesisImage = () => {
                         className={cn(styles.inputUpload,'justify-content-center align-items-center d-flex')}
                         onClick={() => downloadImage()}
                       >
-                        <MdDownload  className="me-2 lh-lg mt-1"/> Download
+                        <MdDownload  className="me-2 lh-lg mt-1"/> 
+                        {t("synthesisImage.btnDownload")}
                       </div>
                     </div>
                   </div>

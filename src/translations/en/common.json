@@ -27,5 +27,29 @@
         "btnChoose": "Select video",
         "btnEdit": "HD Video",
         "btnCut": "Background removal"
+    },
+    "editVideo": {
+        "enhanceVideo": "Video Enhance",
+        "btnUpload": "Upload Video",
+        "original": "Original",
+        "result": "Result",
+        "btnDownload": "Download"
+    },
+    "editImage": {
+        "enhanceImage": "Image Enhance",
+        "btnUpload": "Upload Image",
+        "original": "Original",
+        "result": "Result",
+        "btnDownload": "Download"
+    },
+    "synthesisImage": {
+        "backgroundGenerator": "Image Background Generator",
+        "btnUpload": "Upload Image",
+        "original": "Original",
+        "result": "Result",
+        "btnDownload": "Download",
+        "prompt": "Prompt",
+        "negativePrompt": "Negative Prompt",
+        "btnRun": "Run"
     }
 }
