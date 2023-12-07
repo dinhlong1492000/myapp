@@ -46,11 +46,11 @@ const Payment = ({ setStatusPayment, setVisible }) => {
           </div>
         </div>
         <button
+        className={cn(styles.btnVerify,"mt-3")}
           onClick={() => {
             setStatusPayment(true);
             setVisible(false);
           }}
-          className="btn mt-3"
         >
           Xác thực thanh toán
         </button>
