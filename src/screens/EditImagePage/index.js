@@ -37,7 +37,11 @@ const EditImagePage = () => {
     {
       onSuccess: (data) => {
         setResult(data?.data?.data);
+        toast.success('Tour delete successfully');
       },
+      onError:(error) =>{
+        toast.error(error?.response?.data?.message)
+      }
     }
   );
 
@@ -142,7 +146,7 @@ const EditImagePage = () => {
               </div>
               <div className="col-4 text-center d-flex justify-content-center align-items-center">
                 <div className="w-100 text-center  d-flex justify-content-center align-items-center">
-                  {resultImage ? (
+                  {resultImage && enhanceImageMutation.isSuccess ? (
                     <img
                       src={resultImage}
                       alt="Selected Images"

@@ -60,6 +60,9 @@ const EditVideoPage = () => {
         // });
         toast.success("Video enhanced");
       },
+      onError: (error) => {
+        toast.error(error?.response?.data?.message)
+      }
     });
   }, []);
 
@@ -135,9 +138,6 @@ const EditVideoPage = () => {
             <div className="row">
               <div className="col-4 text-center">{t("editVideo.original")}</div>
               <div className="col-4 text-center">{t("editVideo.result")}</div>
-              <div className="col-4 text-end pe-4 cursor-pointer">
-                <IoMdClose />
-              </div>
             </div>
             <div className="row">
               <div className="col-4 text-center">
@@ -155,7 +155,7 @@ const EditVideoPage = () => {
               </div>
               <div className="col-4 text-center d-flex justify-content-center align-items-center">
                 <div className="w-100 text-center  d-flex justify-content-center align-items-center">
-                  {resultVideo ? (
+                  {resultVideo && enhanceVideoMutation.isSuccess ? (
                     <ReactPlayer
                       url={resultVideo}
                       width="100%"

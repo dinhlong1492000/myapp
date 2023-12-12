@@ -34,7 +34,11 @@ const SynthesisImage = () => {
     {
       onSuccess: (data) => {
         setResult(data?.data?.data[1]);
+        toast.success('Tour delete successfully');
       },
+      onError:(error) =>{
+        toast.error(error?.response?.data?.message)
+      }
     }
   );
 

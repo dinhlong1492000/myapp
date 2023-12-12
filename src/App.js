@@ -9,6 +9,7 @@ import EditImagePage from "./screens/EditImagePage";
 import SynthesisImage from "./screens/SynthesisImage";
 import EditVideoPage from "./screens/EditVideoPage";
 import { withTranslation, Trans } from "react-i18next";
+import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TranslateComponent } from "./components/TranslateComponent";
 
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <ToastContainer autoClose={1000} />
         <BrowserRouter>
           <TranslateComponent>
             <Routes>
